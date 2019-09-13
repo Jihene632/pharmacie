@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>GestionUser</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  
+</head>
+<body>
+    <div class="area"></div>
+    <nav class="main-menu">
+      <ul>
+          <div *ngIf="admin"> <li>
+              <a  href="/users">
+                <i class="fa fa-user fa-2x"></i>
+                  <span class="nav-text">
+                     Utilisateur
+                  </span>
+              </a>
+            
+          </li>
+        </div> 
+          <li class="">
+                  <a  href="/laboratoires">
+                  <i class="fa fa-plus-square fa-2x"></i>
+                  <span class="nav-text">
+                     Laboratoire
+                  </span>
+              </a>
+              
+          </li>
+          <li class="">
+              <a href="/produits">
+          <i class="fa fa-medkit" aria-hidden="true"></i>
+                  <span class="nav-text">
+                      Produit
+                  </span>
+              </a>
+              
+          </li>
+
+          <li>
+              <a  href="/commandes">
+                <i class="fa fa-briefcase"></i>
+                  <span class="nav-text">
+                     Commande
+                  </span>
+              </a>
+            
+          </li>
+
+          <li>
+              <a  href="/ventes">
+                <i class="fa fa-usd"></i>
+                  <span class="nav-text">
+                     Vente
+                  </span>
+              </a>
+            
+          </li>
+          <li>
+              <a  href="/stocks">
+                <i class="fa fa-shopping-cart"></i>
+                  <span class="nav-text">
+                     Stock
+                  </span>
+              </a>
+            
+          </li>
+      </ul>
+    </nav>
+
+<div class="container">
+        <h2 class="list"> Modifier Utilisateur</h2>
+<form class="form" #employeeForm="ngForm" (ngSubmit)="updateUser(userForm)"  >
+    <div class="row">
+        <div class="col-25">
+        <label for="fname">Nom</label>
+        </div>
+        
+        <div class="col-75">
+        <input  class="controle"   id="fname" type="text" name="FIRSTNAME"  #FIRSTNAME="ngModel" [(ngModel)]="user.FIRSTNAME" pattern="[a-zA-Z-\.]{5,8}" placeholder="entre 5 et 8 caractères "   >
+        <span class="resultat"></span>
+        </div>
+        <div class="form-group">
+            <div *ngIf="FIRSTNAME.invalid && (FIRSTNAME.dirty || FIRSTNAME.touched)"
+                class="alert alert-danger">
+              <div *ngIf="FIRSTNAME.errors.required">
+                Le nom est obligatoire.
+              </div>
+              </div>
+              </div>
+    
+    </div>
+
+        <div class="row">
+            <div class="col-25">
+            <label for="fname">Prénom</label>
+            </div>
+            
+            <div class="col-75">
+            <input  class="controle"   id="fname" type="text" name="LASTNAME"  #LASTNAME="ngModel" [(ngModel)]="user.LASTNAME"  pattern="[a-zA-Z-\.]{5,15}" placeholder="entre 5 et 15 caractères" >
+            <span class="resultat"></span>
+            </div>
+            <div class="form-group">
+                <div *ngIf="LASTNAME.invalid && (LASTNAME.dirty || LASTNAME.touched)"
+                    class="alert alert-danger">
+                  <div *ngIf="LASTNAME.errors.required">
+                   Le prenom est obligatoire.
+                  </div>
+                  </div>
+                  </div> 
+        
+        </div>
+<div class="row">
+<div class="col-25">
+<label for="fname">CIN</label>
+</div>
+<div class="col-75">
+<input  class="controle"   id="fname" type="text" name="CIN"  #CIN="ngModel" [(ngModel)]="user.CIN"  placeholder="CIN" pattern="[0-9-\.]{8,8}" placeholder="exactement 8 nombres "  min="11111111" max="9999999" >
+
+<span class="resultat"></span>
+</div>
+<div class="form-group">
+    <div *ngIf="CIN.invalid && (CIN.dirty || CIN.touched)"
+        class="alert alert-danger">
+      <div *ngIf="CIN.errors.required">
+       Le cin est obligatoire.
+      </div>
+      </div>
+      </div>
+</div>
+
+
+<div class="row">
+    <div class="col-25">
+    <label for="fname">Adresse</label>
+    </div>
+    <div class="col-75">
+        <input  class="controle"   id="CITY" type="text" name="CITY"  #CITY="ngModel" [(ngModel)]="user.CITY"  pattern="[a-zA-Z-\.]{3,20}" placeholder="entre 3 et 20 caractères" style="width:190px;;margin-left:-150px;" >
+        <span class="resultat"></span>
+        <div class="form-group">
+            <div *ngIf="CITY.invalid && (CITY.dirty || CITY.touched)"
+                class="alert alert-danger">
+              <div *ngIf="CITY.errors.required">
+                La ville est obligatoire.
+              </div>
+              </div>
+              </div>     </div>
+    
+    
+    </div>
+ <div class="row">
+    <div class="col-25">
+    <label for="fname">Date de naissance</label>
+    </div>
+    <div class="col-225">
+    <input  type ="date" style="width:190px;margin-top:-26px"class="form-control" name="BIRTHDAY" #BIRTHDAY="ngModel" [(ngModel)]="user.BIRTHDAY"  > 
+ 
+    <span class="resultat"></span>  
+</div>
+<div class="form-group">
+    <div *ngIf="BIRTHDAY.invalid && (BIRTHDAY.dirty || BIRTHDAY.touched)"
+        class="alert alert-danger">
+      <div *ngIf="BIRTHDAY.errors.required">
+       La date de naissance est obligatoire.
+      </div>
+      </div>
+      </div>
+
+</div> 
+
+    <div class="row" >
+        <div class="col-255">
+        <label for="fname">Email</label>
+        </div>
+        <div class="col-755" >
+        <input  class="controle"   id="fname" type="text" name="EMAIL"  #EMAIL="ngModel" [(ngModel)]="user.EMAIL"   pattern="[a-zA-Z-\.]{2,20}"  >
+     
+        <span class="resultat"></span>
+        </div>
+        <div class="form-group">
+            <div *ngIf="EMAIL.invalid && (EMAIL.dirty || EMAIL.touched)"
+                class="alert alert-danger">
+              <div *ngIf="EMAIL.errors.required">
+                L'email est obligatoire.
+              </div>
+              </div>
+              </div>
+    </div>
+
+        <div class="row">
+            <div class="col-255">
+            <label  for="fname">Phone</label>
+            </div>
+            <div class="col-755">
+            <input  class="controle"   id="fname" type="text" name="PHONE"  #PHONE="ngModel" [(ngModel)]="user.PHONE"   pattern="[0-9-\.]{8}" placeholder="exactement 8 nombres"  >
+            <span class="resultat"></span>
+            </div>
+            <div class="form-group">
+                <div *ngIf="PHONE.invalid && (PHONE.dirty || PHONE.touched)"
+                    class="alert alert-danger">
+                  <div *ngIf="PHONE.errors.required">
+                Le numero de telephone est obligatoire.
+                  </div>
+                  </div>
+                  </div>  
+        
+        
+        </div>
+
+            <div class="row">
+                <div class="col-255">
+                <label for="fname">Login</label>
+                </div>
+                <div class="col-755">
+                <input  class="controle"   id="fname" type="text" name="LOGIN"  #LOGIN="ngModel" [(ngModel)]="user.LOGIN"   pattern="[a-zA-Z-\.]{4,10}" placeholder="entre4 et 10 caractères"  >
+                <span class="resultat"></span>
+                </div>
+                <div class="form-group">
+                    <div *ngIf="LOGIN.invalid && (LOGIN.dirty || LOGIN.touched)"
+                        class="alert alert-danger">
+                      <div *ngIf="LOGIN.errors.required">
+                   Le login est obligatoire.
+                      </div>
+                      </div>
+                      </div> 
+            
+            </div>
+
+                <div class="row">
+                    <div class="col-255">
+                    <label for="fname">Mot de passe</label>
+                    </div>
+                    <div class="col-755">
+                    <input  class="controle"   id="fname" type="password" name="PASSWORD"  #PASSWORD="ngModel" [(ngModel)]="user.PASSWORD"   pattern="[a-zA-Z-\.]{3,10}" placeholder="entre 3 et 10 caractères "  >
+                    <span class="resultat"></span>
+                    </div>
+                    <div class="form-group">
+                        <div *ngIf="PASSWORD.invalid && (PASSWORD.dirty || PASSWORD.touched)"
+                            class="alert alert-danger">
+                          <div *ngIf="PASSWORD.errors.required">
+                            Le mot de passe est obligatoire.
+                          </div>
+                          </div>
+                          </div>    
+                
+                </div>
+
+                    <div class="row">
+                        <div class="col-255">
+                        <label for="fname">RIB</label>
+                        </div>
+                        <div class="col-755">
+                        <input  class="controle"   id="fname" type="text" name="RIB"  #RIB="ngModel" [(ngModel)]="user.RIB" pattern="[0-9-\.]{2,5}" placeholder="entre 2 et 5 nombres"  >
+                        <span class="resultat"></span>
+                        </div>
+                        <div class="form-group">
+                            <div *ngIf="RIB.invalid && (RIB.dirty || RIB.touched)"
+                                class="alert alert-danger">
+                              <div *ngIf="RIB.errors.required">
+                                Le RIB est obligatoire.
+                              </div>
+                              </div>
+                              </div> 
+                    
+                    </div>
+
+
+                        <div class="row">
+                                <div class="col-255">
+                                <label for="subject" >Rôle</label>
+                                </div>
+                              
+                                <div class="col-755"  >
+                                <div  >
+                                        <select (change)="changeCity($event)" id="role" style="width:195px;margin-left:-150px">
+                                                <option value="">choisir le rôle</option>  
+                                              <option *ngFor="let role of roles" [ngValue]="role">{{role}}</option>
+                                              </select>
+                                  </div>
+                                  </div></div>
+                                
+
+                        <div class="row">
+                            <input type="submit" value="Modifier">
+                            </div>
+                                
+                                
+                                
+                            <div class="row">
+                            <input type="reset" (click)="resetForm(userForm)" value="Annuler">
+                            </div>
+                           
+                              </form>
+                              </div>
+                              <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+                              <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+                              <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+                            </body>
+                            </html>  

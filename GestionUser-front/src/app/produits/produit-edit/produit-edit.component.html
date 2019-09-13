@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="javascript.js">
+
+</script>
+</head>
+<body>
+    <div class="area"></div>
+    <nav class="main-menu">
+      <ul>
+          <div *ngIf="admin"> <li>
+              <a  href="/users">
+                <i class="fa fa-user fa-2x"></i>
+                  <span class="nav-text">
+                     Utilisateur
+                  </span>
+              </a>
+            
+          </li>
+        </div> 
+          <li class="">
+                  <a  href="/laboratoires">
+                  <i class="fa fa-plus-square fa-2x"></i>
+                  <span class="nav-text">
+                     Laboratoire
+                  </span>
+              </a>
+              
+          </li>
+          <li class="">
+              <a href="/produits">
+          <i class="fa fa-medkit" aria-hidden="true"></i>
+                  <span class="nav-text">
+                      Produit
+                  </span>
+              </a>
+              
+          </li>
+
+          <li>
+              <a  href="/commandes">
+                <i class="fa fa-briefcase"></i>
+                  <span class="nav-text">
+                     Commande
+                  </span>
+              </a>
+            
+          </li>
+
+          <li>
+              <a  href="/ventes">
+                <i class="fa fa-usd"></i>
+                  <span class="nav-text">
+                     Vente
+                  </span>
+              </a>
+            
+          </li>
+          <li>
+              <a  href="/stocks">
+                <i class="fa fa-shopping-cart"></i>
+                  <span class="nav-text">
+                     Stock
+                  </span>
+              </a>
+            
+          </li>
+      </ul>
+    </nav>
+ 
+       
+ 
+<div class="container">
+<form class="cusform" #employeeForm="ngForm"  (ngSubmit)="updateProduit(produit.ID)"style="margin-top:130px;margin-left:-30px;">
+<h2 class="list"> Modifier Produit</h2>
+<input type="hidden"  #ID="ngModel"  [(ngModel)]="produit.ID">
+
+<div class="row">
+<div class="col-25">
+<label for="lname">Code_CIP</label>
+</div>
+
+  
+<div class="col-75"> 
+        <div class="form-group ">
+<input  name="CODECIP"  min="11111111" max="99999999" style="width:250px;margin-left:-130px" id="CODECIP"  class="controle" type="text"  #CODECIP="ngModel" [(ngModel)]="produit.CODECIP" pattern="[0-9-\.]{8,8}" placeholder="exactement 8 nombres" >
+<span class="resultat" style="margin-left:150px"></span>
+
+
+
+</div>
+
+
+</div>
+
+<div class="alert alert-danger" style="margin-left:150px" *ngIf="CODECIP.invalid && (CODECIP.dirty || CODECIP.touched)"
+class="alert alert-danger">
+<div style="margin-left:150px" *ngIf="CODECIP.errors.required">
+Le Code CIP est obligatoire.
+</div>
+</div>
+
+</div>
+  
+
+<div class="row">
+<div class="col-25">
+<label for="subject">Nom du Produit</label>
+</div>
+ 
+<div class="col-75">
+        <div class="form-group ">
+<input  class="controle"    style="width:250px;margin-left:-130px" type="text" id="NAMEP" name="NAMEP" #NAMEP="ngModel" [(ngModel)]="produit.NAMEP"  pattern="[a-zA-Z-\.]{3,12}"    placeholder="De 3 à 12 caractères"  >
+<span class="resultat" style="margin-left:150px"></span></div>
+
+</div>
+<div *ngIf="NAMEP.invalid && (NAMEP.dirty || NAMEP.touched)"
+        class="alert alert-danger ">
+      <div  *ngIf="NAMEP.errors.required">
+      Le nom est obligatoire .
+      </div>
+      </div>
+      </div>
+   
+<div class="row">
+<div class="col-25">
+<label for="subject">Descriptions</label>
+</div>
+<div class="col-75">
+        <div class="form-group ">
+<input class="form-control"   id="DESCRIPTIONS"    [(ngModel)]="produit.DESCRIPTIONS"  style="width:250px;margin-left:-130px;height:40px;"class="controle" type="text" name="DESCRIPTIONS"  #DESCRIPTIONS="ngModel"      pattern="[a-zA-Z-\.]{3,40}"    placeholder="De 3 à 40 caractères"  >
+<span class="resultat"style="margin-left:150px"></span></div>
+
+</div>
+<div *ngIf="DESCRIPTIONS.invalid && (DESCRIPTIONS.dirty || DESCRIPTIONS.touched)"
+        class="alert alert-danger" style="margin-left:150px">
+      <div style="margin-left:150px" *ngIf="DESCRIPTIONS.errors.required">
+        La description est obligatoire.
+      </div>
+      </div>
+</div>
+
+
+    
+  
+
+<div class="row"  >
+<div class="col-25">
+<label for="subject">Dosage</label>
+</div>
+<div class="col-75" >
+        <div class="form-group ">
+          <div style="width:150px;margin-left:-130px">
+<input class="controle"   id="DOSAGE"  style="width:250px;" type="text" name="DOSAGE" #DOSAGE="ngModel" [(ngModel)]="produit.DOSAGE"   pattern="[a-zA-Z-\.]{5,20}"    placeholder="De 5 à 20 caractères"  >
+</div><span class="resultat" style="margin-left:150px"></span>
+</div>
+
+</div>
+<div *ngIf="DOSAGE.invalid && (DOSAGE.dirty || DOSAGE.touched)"
+        class="alert alert-danger" style="margin-left:150px">
+      <div  style="margin-left:150px" *ngIf="DOSAGE.errors.required">
+       Le dosage est obligatoire
+      </div>
+      </div>
+</div>
+
+
+<div class="row"  >
+    <div class="col-25">
+    <label for="subject">Forme</label>
+    </div>
+    
+    <div class="col-75">
+            <select (change)="changeform($event)"  id="form"  style="width:250px;margin-left:-130px">
+                <option value="">Choisir la Forme</option>  
+              <option *ngFor="let form of forms" [ngValue]="form">{{form}}</option>
+              </select>  
+            
+            <span class="resultat"></span> 
+        </div> </div>
+
+      
+
+    <div class="row" style="width:450px;margin-left:550px;margin-top:-330px">
+        <div class="col-25">
+        <label for="subject" >Classe</label>
+        </div>
+        
+        <div class="col-75">
+                <select (change)="changeClass($event)" class="controle" id="class" >
+                    <option value="">Choisir la Classe</option>  
+                  <option *ngFor="let class of classs" [ngValue]="class">{{class}}</option>
+                  </select>  
+                
+                <span class="resultat"></span> 
+            </div>    
+  </div>
+
+
+
+
+
+
+
+<div class="row" style="width:450px;margin-left:550px;margin-top:-2px">
+<div class="col-25">
+<label for="fname" >Prix Achat</label>
+</div>
+    
+<div class="col-75">
+<input  class="controle" id="PRIXACHAT" min="10" max="9999" style="width:250px" type="text" name="PRIXACHAT"  #PRIXACHAT="ngModel" [(ngModel)]="produit.PRIXACHAT"  pattern="[0-9-\.]{2,4}" placeholder="De 2 à 4 Nombres "  >
+<span class="resultat"  style="position:relative;top:-2px;left:150px"></span>
+</div>
+
+<div *ngIf="PRIXACHAT.invalid && (PRIXACHAT.dirty || PRIXACHAT.touched)"
+        class="alert alert-danger" style="margin-left:150px">
+      <div *ngIf="PRIXACHAT.errors.required" style="margin-left:150px">
+      Le prix d'achat est obligatoire 
+      </div>
+      </div></div>
+
+
+
+
+<div class="row"  style="width:450px;margin-left:550px;margin-top:10px">
+<div class="col-25">
+<label for="fname" >Prix Vente</label>
+</div>
+        
+<div class="col-75">
+<input  class="controle" id="PRIXVENTE" type="text" style="width:250px" name="PRIXVENTE"  #PRIXVENTE="ngModel"  [(ngModel)]="produit.PRIXVENTE"  pattern="[0-9-\.]{2,4}" placeholder="De 2 à 4 Nombres"  min="10" max="9999"  >
+<span class="resultat" style="position:relative;top:10px;left:150px"></span>
+</div>
+<div *ngIf="PRIXVENTE.invalid && (PRIXVENTE.dirty || PRIXVENTE.touched)"
+        class="alert alert-danger" style="margin-left:150px">
+      <div *ngIf="PRIXVENTE.errors.required" style="margin-left:150px">
+      Le prix de vente est obligatoire
+      </div>
+      </div>
+</div>
+
+<div class="row"  >
+        <div class="col-25">
+        <label for="fname"  style="position:relative;top:10px;left:560px">CNAM</label>
+        </div>
+                
+        <div class="col-75">
+        <input  class="controle" id="CNAM" type="text"  style="width:250px;position:relative;top:8px;left:390px" name="CNAM"  #CNAM="ngModel" [(ngModel)]="produit.CNAM" min="10" max="9999" pattern="[0-9\.]{2,4}"  placeholder="De 2 à 4 Nombres"  >
+        <span class="resultat" style="width:250px;position:relative;top:8px;left:540px" ></span>
+        </div>
+        <div *ngIf="CNAM.invalid && (CNAM.dirty || CNAM.touched)"
+        class="alert alert-danger" style="margin-left:150px">
+      <div *ngIf="CNAM.errors.required" style="margin-left:150px">
+        Code Cnam est obligatoire.
+      </div>
+      </div>
+      </div>
+
+
+<div class="row"  style="position:relative;top:10px;left:555px">
+<div class="col-25">
+<label for="subject" >Laboratoire</label>
+    </div>
+    <div class="col-75">
+      <select (change)="changeLabo($event)" id="role" style="width:250px;position:relative;left:-164px">
+            <option value="">Choisir la Laboratoire</option>  
+          <option *ngFor="let laboratoire of Laboratoires" [ngValue]="laboratoire">{{laboratoire.NAMEL}}</option>
+          </select>
+    
+    <span class="resultat"></span> 
+</div>
+</div>
+
+
+<div class="row">
+        <div class="col-25">
+        <label for="subject" >IS_Ordonnance</label>
+        </div>
+      
+        <div class="col-75"  >
+        <div  >
+            <input type="radio"  name="title" value="Oui"   #FirstName="ngModel" [(ngModel)]="produit.IS_ORDONNACE" >
+            <label for="r1" >Oui</label>
+            <input type="radio"  name="title" value="om"  #FirstName="ngModel" [(ngModel)]="produit.IS_ORDONNACE"  >
+            <label for="r2">Non</label>
+          </div>
+          
+          <div></div>
+  
+  
+  </div></div>
+  <div class="row ">
+    <input type="submit"  value="Modifier">
+  </div>
+  <div class="row">
+    <input type="reset"   (click)="resetForm(produitForm)" value="Annuler">
+  </div>
+
+  </form>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+</body>
+</html>

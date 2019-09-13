@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="javascript.js">
+
+</script>
+</head>
+<body>
+    <div class="area"></div>
+    <nav class="main-menu">
+      <ul>
+          <div *ngIf="admin"> <li>
+              <a  href="/users">
+                <i class="fa fa-user fa-2x"></i>
+                  <span class="nav-text">
+                     Utilisateur
+                  </span>
+              </a>
+            
+          </li>
+        </div> 
+          <li class="">
+                  <a  href="/laboratoires">
+                  <i class="fa fa-plus-square fa-2x"></i>
+                  <span class="nav-text">
+                     Laboratoire
+                  </span>
+              </a>
+              
+          </li>
+          <li class="">
+              <a href="/produits">
+          <i class="fa fa-medkit" aria-hidden="true"></i>
+                  <span class="nav-text">
+                      Produit
+                  </span>
+              </a>
+              
+          </li>
+
+          <li>
+              <a  href="/commandes">
+                <i class="fa fa-briefcase"></i>
+                  <span class="nav-text">
+                     Commande
+                  </span>
+              </a>
+            
+          </li>
+
+          <li>
+              <a  href="/ventes">
+                <i class="fa fa-usd"></i>
+                  <span class="nav-text">
+                     Vente
+                  </span>
+              </a>
+            
+          </li>
+          <li>
+              <a  href="/stocks">
+                <i class="fa fa-shopping-cart"></i>
+                  <span class="nav-text">
+                     Stock
+                  </span>
+              </a>
+            
+          </li>
+      </ul>
+    </nav>
+ 
+
+    <div class="container">
+<form class="form" #employeeForm="ngForm" (ngSubmit)="updateVente(vente.ID)"  >
+    <h2 class="list"> Modifier Vente </h2>
+    <input type="hidden"  #ID="ngModel" [(ngModel)]="vente.ID">
+
+
+    <div class="row">
+        <div class="col-25">
+          <label for="subject"  id="fname">Id de Produit</label>
+        </div>
+        <div class="col-75"  id="QUAN">
+            <select (change)="changeProd($event)" id="role" required>
+                  <option value="">choisir le Produit</option>  
+                <option *ngFor="let produit of Produits" [ngValue]="produit">{{produit.NAMEP}}</option>
+                </select>
+          
+          <span class="resultat"></span> 
+      </div>
+    </div>
+
+        
+  <div class="row">
+      <div class="col-25">
+        <label for="subject"   id="fname">Quantité</label>
+      </div>
+      <div class="col-75">
+        <input class="form-control" class="controle" type="QUANTITY" id="QUANTITY"  name="QUANTITY"  #QUANTITY="ngModel" [(ngModel)]="vente.QUANTITY"  pattern="[0-9-\.]{2,4}" placeholder="De 2 à 4 Nombres"  required >
+        <span class="resultat"></span>
+      </div>
+      <div class="form-group">
+        <div *ngIf="QUANTITY.invalid && (QUANTITY.dirty || QUANTITY.touched)"
+            class="alert alert-danger">
+          <div *ngIf="QUANTITY.errors.required">
+            la quantité est obligatoire.
+          </div>
+          </div>
+          </div>
+  </div>
+
+
+    <div class="row">
+        <div class="col-25">
+          <label for="lname"  id="fname">Date de Vente </label>
+        </div>
+        <div class="col-75">
+            <div class="form-group">  
+                <input type ="date"  class="form-control"  id="QUANTITY"   name="DATEVENTE" #Position="ngModel" [(ngModel)]="vente.DATEVENTE"  required> 
+              
+             </div> </div>
+  
+  
+    </div>
+  
+
+  
+  <div class="row">
+      <input type="submit" value="Modifier">
+    </div>
+    
+    
+    
+    <div class="row">
+        <div class="form-group ">
+        <input type="reset" value="Annuler" (click)="resetForm(venteForm)">
+      </div></div>
+  
+  
+    
+      
+
+   
+  </form>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+</body>
+</html>

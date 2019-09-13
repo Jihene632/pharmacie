@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="javascript.js">
+
+</script>
+</head>
+<body>
+    <div class="area"></div>
+    <nav class="main-menu">
+      <ul>
+          <div *ngIf="admin"> <li>
+              <a  href="/users">
+                <i class="fa fa-user fa-2x"></i>
+                  <span class="nav-text">
+                     Utilisateur
+                  </span>
+              </a>
+            
+          </li>
+        </div> 
+          <li class="">
+                  <a  href="/laboratoires">
+                  <i class="fa fa-plus-square fa-2x"></i>
+                  <span class="nav-text">
+                     Laboratoire
+                  </span>
+              </a>
+              
+          </li>
+          <li class="">
+              <a href="/produits">
+          <i class="fa fa-medkit" aria-hidden="true"></i>
+                  <span class="nav-text">
+                      Produit
+                  </span>
+              </a>
+              
+          </li>
+
+          <li>
+              <a  href="/commandes">
+                <i class="fa fa-briefcase"></i>
+                  <span class="nav-text">
+                     Commande
+                  </span>
+              </a>
+            
+          </li>
+
+          <li>
+              <a  href="/ventes">
+                <i class="fa fa-usd"></i>
+                  <span class="nav-text">
+                     Vente
+                  </span>
+              </a>
+            
+          </li>
+          <li>
+              <a  href="/stocks">
+                <i class="fa fa-shopping-cart"></i>
+                  <span class="nav-text">
+                     Stock
+                  </span>
+              </a>
+            
+          </li>
+      </ul>
+    </nav>
+ 
+       
+<div class="container text-center">
+
+    <div style="text-align:center"> 
+    <div class="liste">
+        <h2 class="list">  Liste des  Produits</h2>
+      </div>
+</div>    
+  </div>
+    <div class="container">
+            <div class="row">
+
+                <span class="pull-right">
+                    <div class="bouton">
+                    <button class="btn btn-lg btn-block btn-info"  (click)="onAddProduit()">Ajouter Produit</button>
+                  </div>
+                  </span>
+
+                  <div class="search-hero">
+                      <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="&#61442;  Start searching for a hero by id or name or country">
+                    </div>
+
+                    <table class="table table-striped" >
+        <thead>
+          <tr>
+            
+            <th>Code_CIP </th>
+            <th>Nom du Produit </th>
+            <th>Descriptions </th>
+            <th>Dosage </th>
+            <th>Forme</th>
+            <th>Classe</th>
+            <th>Prix Achat</th>
+            <th>Prix Vente</th>
+            <th>IS_Ordonnance</th>
+            <th>Cnam</th>
+           <!-- <th>Id_Laboratoire</th> -->
+            <th>Laboratoire</th> 
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let produit of Produits  | filter:searchText  | paginate: config">
+          
+            <td (click)="populateForm(produit)"> {{produit.CODECIP}}</td>
+            <td (click)="populateForm(produit)" >{{produit.NAMEP}}</td>
+            <td (click)="populateForm(produit)" >{{produit.DESCRIPTIONS}}</td>
+            <td (click)="populateForm(produit)">{{produit.DOSAGE}}</td>
+            <td (click)="populateForm(produit)">{{produit.FORM }}</td>
+            <td (click)="populateForm(produit)">{{produit.CLASS }}</td>
+            <td (click)="populateForm(produit)">{{produit.PRIXACHAT}}</td>
+            <td (click)="populateForm(produit)">{{produit.PRIXVENTE}}</td>
+            <td (click)="populateForm(produit)">{{produit.IS_ORDONNACE}} </td>
+            <td (click)="populateForm(produit)">{{produit.CNAM}} </td>
+           <!-- <td (click)="populateForm(produit)">{{produit.ID_LABORATOIR}}</td> -->
+           <td (click)="populateForm(produit)">{{produit.labo}}</td> 
+            <td><button (click)="onDelete(produit.ID)" class="btn btn-sm btn-outline-danger">X</button></td>
+            <td><button (click)="onUpdateProduit(produit.ID)" class="btn btn-sm btn-outline-success">O</button></td>
+            
+          </tr>
+        </tbody>
+      </table>
+      <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+     </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  </body>
+  </html>
